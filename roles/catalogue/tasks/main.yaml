@@ -30,7 +30,7 @@
   ansible.builtin.shell: mongosh --host mongodb.daws85s.fun </app/db/master-data.js
   when: catalogue_output.stdout | int < 0 
 
-- name: systemd serrvice
+- name: systemd service
   include_role:
     name: common
     tasks_from: systemd.yaml  
