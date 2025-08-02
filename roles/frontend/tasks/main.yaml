@@ -4,6 +4,16 @@
 - name: enable nginx
   ansible.builtin.command: dnf module enable nginx:1.24 -y
 
+- name: remove default nginx conf
+  ansible.builtin.file:
+    path: /etc/nginx/nginx.conf
+    state: absent
+
+- name: copy roboshop nginx conf
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+
 - name: install nginx
   ansible.builtin.dnf:
     name: nginx
@@ -35,16 +45,6 @@
     src: /tmp/frontend.zip
     dest: /usr/share/nginx/html
     remote_src: yes
-
-- name: remove default nginx conf
-  ansible.builtin.file:
-    path: /etc/nginx/nginx.conf
-    state: absent
-
-- name: copy roboshop nginx conf
-  ansible.builtin.template:
-    src: nginx.conf.j2
-    dest: /etc/nginx/nginx.conf
   notify:
     - Restart nginx   
 
