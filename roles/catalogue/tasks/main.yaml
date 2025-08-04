@@ -41,7 +41,7 @@
     name: common
     tasks_from: systemd.yaml  
 
-- name: app setup
+- name: Deployment
   tags:
   - deployment
   include_role:
